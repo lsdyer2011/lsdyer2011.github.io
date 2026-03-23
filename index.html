@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pugs & Petals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --moss: #7E8C54;
+      --moss-dark: #5a6639;
+      --moss-light: #9aac63;
+      --cream: #F5ECD7;
+      --black: #000000;
+      --off-white: #faf8f3;
+      --warm-white: #f5f0e8;
+      --text-muted: #4a4a3a;
+    }
+
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--off-white);
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+/* -- NAV -- */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(250, 248, 243, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1.5px solid var(--moss);
+}
+
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--moss);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-logo span { color: var(--moss); }
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--cream); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--black);
+  transition: all 0.3s;
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 60px; left: 0; right: 0;
+  background: var(--off-white);
+  border-bottom: 1.5px solid var(--moss);
+  z-index: 99;
+  flex-direction: column;
+  padding: 1.5rem;
+  gap: 1.2rem;
+}
+
+.mobile-menu.open { display: flex; }
+
+.mobile-menu a {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+}
+
+/* -- HERO -- */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 7rem 1.5rem 4rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--off-white);
+}
+
+.hero-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.hero-bg-circle.c1 {
+  width: 500px; height: 500px;
+  background: var(--moss);
+  top: -100px; right: -150px;
+}
+
+.hero-bg-circle.c2 {
+  width: 300px; height: 300px;
+  background: var(--cream);
+  bottom: 50px; left: -80px;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--moss);
+  border: 1px solid var(--moss);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 12vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  animation: fadeUp 0.8s 0.1s ease both;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--moss);
+}
+
+.hero-sub {
+  margin-top: 1.5rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  font-weight: 300;
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.7;
+  animation: fadeUp 0.8s 0.2s ease both;
+}
+
+.hero-cta-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: none;
+}
+
+.btn-primary {
+  background: var(--moss);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--moss-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(126, 140, 84, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--black);
+  border: 1.5px solid var(--black);
+}
+
+.btn-outline:hover {
+  background: var(--black);
+  color: var(--off-white);
+  transform: translateY(-2px);
+}
+
+.hero-paw-row {
+  margin-top: 3rem;
+  display: flex;
+  gap: 0.4rem;
+  animation: fadeUp 0.8s 0.4s ease both;
+}
+
+.paw { font-size: 1.4rem; opacity: 0.25; }
+.paw.active { opacity: 1; }
+
+/* -- SECTION SHARED -- */
+section { padding: 5rem 1.5rem; }
+
+.section-label {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-bottom: 0.6rem;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--moss);
+}
+
+.divider {
+  width: 48px;
+  height: 3px;
+  background: var(--moss);
+  border-radius: 99px;
+  margin: 1.2rem 0 1.8rem;
+}
+
+/* -- ABOUT -- */
+#about {
+  background: var(--warm-white);
+}
+
+.about-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-body {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.about-body strong {
+  color: var(--black);
+  font-weight: 500;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.tag {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: var(--moss);
+  color: #fff;
+}
+
+/* -- MEET THE PUGS -- */
+#meet {
+  background: var(--off-white);
+}
+
+.pugs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.pug-card {
+  border: 1.5px solid #ddd8ca;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.pug-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+}
+
+.pug-img-wrap {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #e8e3d5 0%, #d5cfbf 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.pug-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.06));
+}
+
+.pug-img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pug-img-placeholder p {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.pug-info {
+  padding: 1.5rem;
+}
+
+.pug-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--black);
+}
+
+.pug-badge {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--moss-dark);
+}
+
+.pug-desc {
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* -- BRAND NAME -- */
+.brand { color: var(--moss); }
+
+/* -- PAST EVENTS CAROUSEL -- */
+#gallery {
+  background: var(--warm-white);
+  color: var(--black);
+  overflow: hidden;
+  padding-bottom: 4rem;
+}
+
+#gallery .section-title { color: var(--black); }
+#gallery .divider { background: var(--moss); }
+
+.carousel-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.carousel-track-outer {
+  overflow: hidden;
+  width: 100%;
+  cursor: grab;
+  user-select: none;
+}
+
+.carousel-track-outer:active { cursor: grabbing; }
+
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+}
+
+.carousel-track.left  { animation: scrollLeft  35s linear infinite; }
+.carousel-track.right { animation: scrollRight 40s linear infinite; }
+
+.carousel-track-outer:hover .carousel-track { animation-play-state: paused; }
+
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.carousel-card {
+  flex-shrink: 0;
+  width: 220px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  border: 1.5px solid #ddd8ca;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.carousel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+
+.carousel-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  background: linear-gradient(135deg, #e8e3d5 0%, #d5cfbf 100%);
+  font-size: 2.2rem;
+}
+
+.carousel-img p {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.3);
+}
+
+.carousel-caption {
+  padding: 0.75rem 0.9rem 0.9rem;
+}
+
+.carousel-caption-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.2;
+}
+
+.carousel-caption-date {
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--moss);
+}
+
+.carousel-caption-text {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* -- EVENTS -- */
+#events {
+  background: var(--warm-white);
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.event-card {
+  display: flex;
+  gap: 1.2rem;
+  align-items: flex-start;
+  padding: 1.4rem;
+  border-radius: 16px;
+  background: #fff;
+  border: 1.5px solid #ddd8ca;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.event-card:hover {
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.event-date-box {
+  min-width: 56px;
+  text-align: center;
+  background: var(--moss);
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.6rem 0.5rem;
+}
+
+.event-month {
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.event-day {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.event-body { flex: 1; }
+
+.event-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 0.4rem;
+}
+
+.event-meta span {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.event-desc {
+  margin-top: 0.6rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.event-tag {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(126, 140, 84, 0.12);
+  color: var(--moss-dark);
+}
+
+/* -- CONTACT -- */
+#contact {
+  background: var(--off-white);
+}
+
+.contact-wrap {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.form-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+.form-row .form-group { flex: 1; min-width: 0; }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-group label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1.5px solid #ddd8ca;
+  background: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  color: var(--black);
+  transition: border-color 0.2s;
+  appearance: none;
+  outline: none;
+  width: 100%;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--moss);
+}
+
+.form-group textarea { resize: vertical; min-height: 110px; }
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.social-row {
+  border-top: 1.5px solid #ddd8ca;
+  padding-top: 2rem;
+}
+
+.social-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  border: 1.5px solid #ddd8ca;
+  background: #fff;
+  text-decoration: none;
+  color: var(--black);
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.social-link:hover {
+  border-color: var(--moss);
+  color: var(--moss-dark);
+  transform: translateY(-2px);
+}
+
+.social-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* -- FOOTER -- */
+footer {
+  background: var(--black);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-size: 0.8rem;
+}
+
+footer strong { color: rgba(255,255,255,0.8); }
+footer .footer-paw { color: var(--moss-light); }
+
+/* -- ANIMATIONS -- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* -- TABLET -- */
+@media (min-width: 600px) {
+  .pugs-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* -- DESKTOP -- */
+@media (min-width: 900px) {
+  nav { padding: 1rem 3rem; }
+  section { padding: 6rem 3rem; }
+  .hamburger { display: none !important; }
+  .nav-links { display: flex !important; }
+  .gallery-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 899px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+
+  <nav>
+    <a class="nav-logo" href="#"><span>🐾</span> <span class="brand">Pugs & Petals</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#meet">Meet the Pugs</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#meet" class="mobile-nav-link">Meet the Pugs</a>
+    <a href="#gallery" class="mobile-nav-link">Gallery</a>
+    <a href="#events" class="mobile-nav-link">Events</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
+  </div>
+
+  <!-- HERO -->
+
+  <section class="hero">
+    <div class="hero-bg-circle c1"></div>
+    <div class="hero-bg-circle c2"></div>
+    <span class="hero-eyebrow">Pop-Up Flower Truck 🌸</span>
+    <h1><span class="brand">Pugs &amp;</span><br><em><span class="brand">Petals</span></em></h1>
+    <p class="hero-sub">Follow the wrinkled faces and wagging tails of Gary &amp; Brenda as they sniff their way through life, love, and every flower bed in the neighbourhood.</p>
+    <div class="hero-cta-row">
+      <a href="#events" class="btn btn-primary">Upcoming Events</a>
+      <a href="#meet" class="btn btn-outline">Meet the Pugs</a>
+    </div>
+    <div class="hero-paw-row">
+      <span class="paw active">🐾</span>
+      <span class="paw active">🐾</span>
+      <span class="paw">🐾</span>
+      <span class="paw">🐾</span>
+      <span class="paw">🐾</span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+
+  <section id="about">
+    <div class="about-inner">
+      <span class="section-label reveal">Our Story</span>
+      <h2 class="section-title reveal">About <em><span class="brand">Pugs &amp; Petals</span></em></h2>
+      <div class="divider reveal"></div>
+      <p class="about-body reveal">
+        <strong><span class="brand">Pugs &amp; Petals</span></strong> is a passion project born from two things we love most — our hilariously opinionated pugs and the simple joy of being outdoors. What started as a photo account to share Gary's dramatic side-eyes and Brenda's unstoppable enthusiasm has grown into a community of pug lovers, plant parents, and anyone who believes life is better with a squishy face nearby.
+      </p>
+      <p class="about-body reveal" style="margin-top:1rem;">
+        We host seasonal meet-ups, pug-friendly garden walks, and pop-up events where four-legged guests are always the VIPs. Whether you're a lifelong pug devotee or just discovering the magic of the breed, you're always welcome here.
+      </p>
+      <div class="about-tags reveal">
+        <span class="tag">Flower Shop</span>
+        <span class="tag">Pop Up Events</span>
+        <span class="tag">Pug Mascots</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEET THE PUGS -->
+
+  <section id="meet">
+    <div style="text-align:center; margin-bottom: 2.5rem;">
+      <span class="section-label reveal">The Stars</span>
+      <h2 class="section-title reveal">Meet the <em>Pugs</em></h2>
+      <div class="divider reveal" style="margin: 1.2rem auto 0;"></div>
+    </div>
+    <div class="pugs-grid">
+
+  <!-- Gary -->
+  <div class="pug-card reveal">
+    <div class="pug-img-wrap">
+      <div class="pug-img-placeholder">
+        <span>🐾</span>
+        <p>Gary's Photo</p>
+      </div>
+    </div>
+    <div class="pug-info">
+      <h3 class="pug-name">Gary</h3>
+      <span class="pug-badge">The Philosopher 🤔</span>
+      <p class="pug-desc">Gary approaches every situation with a dramatic pause and a deeply considered side-eye. He is suspicious of squirrels, obsessed with afternoon naps, and holds strong opinions on which side of the sofa is objectively superior. Somehow, he is always right.</p>
+    </div>
+  </div>
+
+  <!-- Brenda -->
+  <div class="pug-card reveal">
+    <div class="pug-img-wrap" style="background: linear-gradient(135deg, #e8d5d0 0%, #d5bfb5 100%);">
+      <div class="pug-img-placeholder">
+        <span>🌸</span>
+        <p>Brenda's Photo</p>
+      </div>
+    </div>
+    <div class="pug-info">
+      <h3 class="pug-name">Brenda</h3>
+      <span class="pug-badge">The Enthusiast 🌸</span>
+      <p class="pug-desc">Brenda sees every stranger as a friend she simply hasn't met yet. She has an unmatched zest for life, an alarming interest in whatever is in your pocket, and a tail that has never once stopped wagging. She is the heart of every room she enters.</p>
+    </div>
+  </div>
+
+</div>
+
+
+  </section>
+
+  <!-- PAST EVENTS -->
+
+  <section id="gallery">
+    <span class="section-label reveal" style="color: rgba(255,255,255,0.5);">Looking Back</span>
+    <h2 class="section-title reveal">Past <em>Events</em></h2>
+    <div class="divider reveal"></div>
+
+```
+<div class="carousel-wrapper">
+
+  <!-- Row 1: scrolls left -->
+  <div class="carousel-track-outer">
+    <div class="carousel-track left" id="row1">
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#dde8cc,#c8d9b0);">🌿<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Spring Garden Walk</div>
+          <div class="carousel-caption-date">March 2025</div>
+          <div class="carousel-caption-text">A misty morning stroll through the botanical garden with 30 pugs in tow.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8d5d5,#d9c0c0);">🐾<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Pug Parade 2024</div>
+          <div class="carousel-caption-date">October 2024</div>
+          <div class="carousel-caption-text">Our annual Halloween costume parade — Gary went as a pumpkin.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#d5d5e8,#c0c0d9);">📸<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Portrait Day</div>
+          <div class="carousel-caption-date">August 2024</div>
+          <div class="carousel-caption-text">Free mini portrait sessions in Riverside Park surrounded by wildflowers.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8e0cc,#d9cfb0);">🌸<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Blossom Festival</div>
+          <div class="carousel-caption-date">May 2024</div>
+          <div class="carousel-caption-text">Flower crowns, live music, and 60+ dogs at Town Square.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#dde8d0,#c8d9b8);">🌻<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Sunflower Meetup</div>
+          <div class="carousel-caption-date">July 2024</div>
+          <div class="carousel-caption-text">Brenda discovered she is taller than a sunflower. Barely.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8d5e8,#d9c0d9);">🎀<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Brenda's Birthday</div>
+          <div class="carousel-caption-date">June 2024</div>
+          <div class="carousel-caption-text">Pupcakes, balloons, and a very confused birthday girl.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#d5e8e8,#b8d5d5);">☕<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Pug & Coffee Pop-Up</div>
+          <div class="carousel-caption-date">February 2024</div>
+          <div class="carousel-caption-text">Cold morning, warm lattes, and an embarrassingly long pug queue.</div>
+        </div>
+      </div>
+
+      <!-- Duplicate for seamless loop -->
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#dde8cc,#c8d9b0);">🌿<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Spring Garden Walk</div>
+          <div class="carousel-caption-date">March 2025</div>
+          <div class="carousel-caption-text">A misty morning stroll through the botanical garden with 30 pugs in tow.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8d5d5,#d9c0c0);">🐾<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Pug Parade 2024</div>
+          <div class="carousel-caption-date">October 2024</div>
+          <div class="carousel-caption-text">Our annual Halloween costume parade — Gary went as a pumpkin.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#d5d5e8,#c0c0d9);">📸<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Portrait Day</div>
+          <div class="carousel-caption-date">August 2024</div>
+          <div class="carousel-caption-text">Free mini portrait sessions in Riverside Park surrounded by wildflowers.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8e0cc,#d9cfb0);">🌸<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Blossom Festival</div>
+          <div class="carousel-caption-date">May 2024</div>
+          <div class="carousel-caption-text">Flower crowns, live music, and 60+ dogs at Town Square.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#dde8d0,#c8d9b8);">🌻<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Sunflower Meetup</div>
+          <div class="carousel-caption-date">July 2024</div>
+          <div class="carousel-caption-text">Brenda discovered she is taller than a sunflower. Barely.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8d5e8,#d9c0d9);">🎀<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Brenda's Birthday</div>
+          <div class="carousel-caption-date">June 2024</div>
+          <div class="carousel-caption-text">Pupcakes, balloons, and a very confused birthday girl.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#d5e8e8,#b8d5d5);">☕<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Pug & Coffee Pop-Up</div>
+          <div class="carousel-caption-date">February 2024</div>
+          <div class="carousel-caption-text">Cold morning, warm lattes, and an embarrassingly long pug queue.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Row 2: scrolls right -->
+  <div class="carousel-track-outer">
+    <div class="carousel-track right" id="row2">
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8e8cc,#d5d5aa);">🏆<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Best in Show</div>
+          <div class="carousel-caption-date">November 2023</div>
+          <div class="carousel-caption-text">Gary took home the "Most Sceptical Expression" ribbon. Richly deserved.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#cce8d5,#aad5bb);">🍂<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Autumn Leaf Walk</div>
+          <div class="carousel-caption-date">October 2023</div>
+          <div class="carousel-caption-text">Crunchy leaves, cosy scarves, and two very energetic pugs.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8d8cc,#d5c0aa);">🎪<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Summer Fair</div>
+          <div class="carousel-caption-date">August 2023</div>
+          <div class="carousel-caption-text">Ice cream, bunting, and Brenda winning the agility course. Just kidding.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#ddd5e8,#c8bbd9);">🌙<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Twilight Picnic</div>
+          <div class="carousel-caption-date">June 2023</div>
+          <div class="carousel-caption-text">A golden-hour gathering with lanterns, music, and way too many snacks.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#cce8e4,#aad5d0);">🌊<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Seaside Day Trip</div>
+          <div class="carousel-caption-date">April 2023</div>
+          <div class="carousel-caption-text">Gary refused to get his paws wet. Brenda refused to leave the water.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8ccd0,#d9aab0);">🌹<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Valentine's Meetup</div>
+          <div class="carousel-caption-date">February 2023</div>
+          <div class="carousel-caption-text">Heart-shaped treats and an extremely competitive tuggy tournament.</div>
+        </div>
+      </div>
+
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#d0e8d0,#b0d9b0);">🎄<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Christmas Jumper Day</div>
+          <div class="carousel-caption-date">December 2022</div>
+          <div class="carousel-caption-text">The annual jumper vote was split. Gary wore a reindeer. Brenda wore tinsel.</div>
+        </div>
+      </div>
+
+      <!-- Duplicate for seamless loop -->
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8e8cc,#d5d5aa);">🏆<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Best in Show</div>
+          <div class="carousel-caption-date">November 2023</div>
+          <div class="carousel-caption-text">Gary took home the "Most Sceptical Expression" ribbon. Richly deserved.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#cce8d5,#aad5bb);">🍂<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Autumn Leaf Walk</div>
+          <div class="carousel-caption-date">October 2023</div>
+          <div class="carousel-caption-text">Crunchy leaves, cosy scarves, and two very energetic pugs.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8d8cc,#d5c0aa);">🎪<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Summer Fair</div>
+          <div class="carousel-caption-date">August 2023</div>
+          <div class="carousel-caption-text">Ice cream, bunting, and Brenda winning the agility course. Just kidding.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#ddd5e8,#c8bbd9);">🌙<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Twilight Picnic</div>
+          <div class="carousel-caption-date">June 2023</div>
+          <div class="carousel-caption-text">A golden-hour gathering with lanterns, music, and way too many snacks.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#cce8e4,#aad5d0);">🌊<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Seaside Day Trip</div>
+          <div class="carousel-caption-date">April 2023</div>
+          <div class="carousel-caption-text">Gary refused to get his paws wet. Brenda refused to leave the water.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#e8ccd0,#d9aab0);">🌹<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Valentine's Meetup</div>
+          <div class="carousel-caption-date">February 2023</div>
+          <div class="carousel-caption-text">Heart-shaped treats and an extremely competitive tuggy tournament.</div>
+        </div>
+      </div>
+      <div class="carousel-card">
+        <div class="carousel-img" style="background:linear-gradient(135deg,#d0e8d0,#b0d9b0);">🎄<p>Photo</p></div>
+        <div class="carousel-caption">
+          <div class="carousel-caption-title">Christmas Jumper Day</div>
+          <div class="carousel-caption-date">December 2022</div>
+          <div class="carousel-caption-text">The annual jumper vote was split. Gary wore a reindeer. Brenda wore tinsel.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+  </section>
+
+  <!-- EVENTS -->
+
+  <section id="events">
+    <span class="section-label reveal">What's On</span>
+    <h2 class="section-title reveal">Upcoming <em>Events</em></h2>
+    <div class="divider reveal"></div>
+
+
+<div class="events-list">
+
+  <div class="event-card reveal">
+    <div class="event-date-box">
+      <div class="event-month">Apr</div>
+      <div class="event-day">12</div>
+    </div>
+    <div class="event-body">
+      <div class="event-title">Spring Garden Walk &amp; Sniff</div>
+      <div class="event-meta">
+        <span>🕙 10:00 AM – 12:00 PM</span>
+        <span>📍 Botanical Garden</span>
+      </div>
+      <p class="event-desc">Our beloved seasonal opener. Bring your pug, your camera, and your best walking shoes for a morning among the blooms. Treats provided (for the dogs).</p>
+      <span class="event-tag">Garden Walk</span>
+    </div>
+  </div>
+
+  <div class="event-card reveal">
+    <div class="event-date-box">
+      <div class="event-month">Apr</div>
+      <div class="event-day">26</div>
+    </div>
+    <div class="event-body">
+      <div class="event-title">Pug &amp; Coffee Pop-Up</div>
+      <div class="event-meta">
+        <span>🕙 9:00 AM – 11:00 AM</span>
+        <span>📍 The Terrace Café</span>
+      </div>
+      <p class="event-desc">A casual morning meetup with excellent coffee, dog-friendly snacks, and the usual chaos that happens when pugs gather. All breeds welcome.</p>
+      <span class="event-tag">Meetup</span>
+    </div>
+  </div>
+
+  <div class="event-card reveal">
+    <div class="event-date-box">
+      <div class="event-month">May</div>
+      <div class="event-day">10</div>
+    </div>
+    <div class="event-body">
+      <div class="event-title"><span class="brand">Pugs &amp; Petals</span> Portrait Day</div>
+      <div class="event-meta">
+        <span>🕐 1:00 PM – 4:00 PM</span>
+        <span>📍 Riverside Park</span>
+      </div>
+      <p class="event-desc">Bring your pug for a free mini portrait session surrounded by wildflowers. Professional photographer on site. Limited spots available.</p>
+      <span class="event-tag">Photography</span>
+    </div>
+  </div>
+
+  <div class="event-card reveal">
+    <div class="event-date-box">
+      <div class="event-month">May</div>
+      <div class="event-day">31</div>
+    </div>
+    <div class="event-body">
+      <div class="event-title">Blossom Festival Parade</div>
+      <div class="event-meta">
+        <span>🕙 11:00 AM – 3:00 PM</span>
+        <span>📍 Town Square</span>
+      </div>
+      <p class="event-desc">Our biggest event of the year. Pug costume contest, flower crowns, live music, and the annual <span class="brand">Pugs &amp; Petals</span> group photo. Don't miss it.</p>
+      <span class="event-tag">Festival</span>
+    </div>
+  </div>
+
+</div>
+
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section id="contact">
+    <div class="contact-wrap">
+      <span class="section-label reveal">Get in Touch</span>
+      <h2 class="section-title reveal">Contact <em>Us</em></h2>
+      <div class="divider reveal"></div>
+
+
+  <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="Jane" />
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Smith" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="jane@email.com" />
+    </div>
+    <div class="form-group">
+      <label for="subject">What's it about?</label>
+      <select id="subject">
+        <option value="">Select a topic…</option>
+        <option>Event enquiry</option>
+        <option>Collaboration</option>
+        <option>Media &amp; press</option>
+        <option>Just saying hi 👋</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="message">Message</label>
+      <textarea id="message" placeholder="Tell us everything…"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary form-submit">Send Message ✉️</button>
+  </form>
+
+  <div class="social-row reveal">
+    <p class="social-label">Find us on social</p>
+    <div class="social-links">
+
+      <a href="https://www.instagram.com/pugs_and_petals?igsh=em4wNzFkem0xbXpw" target="_blank" class="social-link" id="instagram-link">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Instagram
+      </a>
+
+      <a href="https://www.facebook.com/share/1ANxS7MSMc/?mibextid=wwXIfr" target="_blank" class="social-link" id="facebook-link">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+
+    </div>
+  </div>
+</div>
+
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <p><strong><span class="brand">Pugs &amp; Petals</span></strong> <span class="footer-paw">🐾</span> Made with love for Gary &amp; Brenda</p>
+    <p style="margin-top:0.4rem;">© 2026 <span class="brand">Pugs &amp; Petals</span>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+// Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Form handler
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Sent! 🐾';
+      btn.style.background = '#7E8C54';
+      btn.style.color = '#fff';
+      btn.disabled = true;
+    }
+  </script>
+
+</body>
+</html>
