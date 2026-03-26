@@ -817,7 +817,7 @@ footer {
   </div>
   <div class="find-us-inner reveal">
     <div class="map-container">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3441.5!2d-81.6559!3d30.4421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z12839+N+Main+St+Jacksonville+FL+32218!5e0!3m2!1sen!2sus!4v1" allowfullscreen loading="lazy" title="George's Auto Repairs Location"></iframe>
+      <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=12839+N+Main+St,+Jacksonville,+FL+32218&zoom=16" allowfullscreen loading="lazy" title="George's Auto Repairs Location"></iframe>
     </div>
     <div class="address-bar">
       <span>12839 N Main St, Jacksonville, FL 32218</span>
@@ -904,6 +904,36 @@ footer {
         statusEl.textContent = '';
       }, 5000);
     });
+  }
+
+  function copyAddress() {
+    var addr = '12839 N Main St, Jacksonville, FL 32218';
+    var btn = document.getElementById('copyAddr');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(addr).then(function() {
+        btn.textContent = 'Copied!';
+        btn.className = 'copy-btn copied';
+        setTimeout(function() {
+          btn.textContent = 'Copy Address';
+          btn.className = 'copy-btn';
+        }, 2000);
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = addr;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = 'Copied!';
+      btn.className = 'copy-btn copied';
+      setTimeout(function() {
+        btn.textContent = 'Copy Address';
+        btn.className = 'copy-btn';
+      }, 2000);
+    }
   }
 
 </script>
